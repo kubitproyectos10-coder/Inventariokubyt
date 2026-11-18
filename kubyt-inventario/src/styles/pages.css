@@ -165,3 +165,8 @@
   .modal{max-height:92vh;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
   .preview.totals{grid-template-columns:1fr 1fr 1fr}
 }
+
+/* Inicio simplificado */
+.home-alert{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--danger-bg);color:#9B2C28;border-radius:14px;padding:14px 18px;font-size:14px;line-height:1.45;margin:-8px 0 18px}
+.home-alert-go{margin-left:auto;font-weight:600;white-space:nowrap}
+.home-more{margin-top:18px;font-size:13.5px}

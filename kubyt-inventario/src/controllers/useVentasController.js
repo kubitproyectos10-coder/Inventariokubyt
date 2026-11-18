@@ -1,6 +1,6 @@
 /** CONTROLADOR · Ventas */
 import {
-  CANALES, anularVenta, esEmpaque, calcularVenta, descargarCSV, labelOf, registrarVenta, today, validarVenta,
+  CANALES, anularVenta, esEmpaque, totalesVentas, utilidadDeVenta, calcularVenta, descargarCSV, labelOf, registrarVenta, today, validarVenta,
 } from '../models';
 import { useData } from './DataController';
 import { useFormModal } from './useFormModal';
@@ -51,17 +51,9 @@ export function useVentasController() {
   const producto = data.productosById[form.values.productoId];
   const preview = producto ? calcularVenta(form.values, producto, data.insumosById, data.ajustes) : null;
 
-  const totales = search.result.reduce(
-    (t, v) => {
-      const ing = n(v.cantidad) * n(v.precioUnitario);
-      const costo = n(v.cantidad) * (n(v.costoMaterial) + n(v.costoImpresion) + n(v.costoEmpaque) + n(v.costoManoObra) + n(v.costoAdminEstimado)) + n(v.costoEnvio);
-      return { unidades: t.unidades + n(v.cantidad), ingresos: t.ingresos + ing, utilidad: t.utilidad + ing - costo };
-    },
-    { unidades: 0, ingresos: 0, utilidad: 0 }
-  );
-
-  const utilidadVenta = (v) =>
-    n(v.cantidad) * (n(v.precioUnitario) - n(v.costoMaterial) - n(v.costoImpresion) - n(v.costoEmpaque) - n(v.costoManoObra) - n(v.costoAdminEstimado)) - n(v.costoEnvio);
+  const t = totalesVentas(search.result);
+  const totales = { unidades: t.unidades, ingresos: t.ingresos, utilidad: t.ganancia };
+  const utilidadVenta = utilidadDeVenta;
 
   const anular = async (v) => {
     if (await confirm({ title: '¿Anular esta venta?', message: `${v.cantidad} × ${v.productoNombre} volverán al stock${v.empaqueNombre ? `, junto con ${v.cantidad} × ${v.empaqueNombre}` : ''}.`, confirmLabel: 'Anular venta' })) {

@@ -71,6 +71,25 @@ export function registrarVenta(d, producto, insumosById, ajustes) {
   });
 }
 
+/** Costo por unidad guardado en la venta (con el que se vendió). */
+export const costoUnidadVenta = (v) =>
+  n(v.costoMaterial) + n(v.costoImpresion) + n(v.costoEmpaque) + n(v.costoManoObra) + n(v.costoAdminEstimado);
+
+/** Ganancia de una venta: lo cobrado − costo de las piezas − envío asumido. */
+export const utilidadDeVenta = (v) => n(v.cantidad) * (n(v.precioUnitario) - costoUnidadVenta(v)) - n(v.costoEnvio);
+
+/** Totales de una lista de ventas. */
+export const totalesVentas = (ventas) =>
+  ventas.reduce(
+    (t, v) => ({
+      ventas: t.ventas + 1,
+      unidades: t.unidades + n(v.cantidad),
+      ingresos: t.ingresos + n(v.cantidad) * n(v.precioUnitario),
+      ganancia: t.ganancia + utilidadDeVenta(v),
+    }),
+    { ventas: 0, unidades: 0, ingresos: 0, ganancia: 0 }
+  );
+
 /** Anular venta: devuelve las unidades al stock (y los empaques, si se usaron). */
 export function anularVenta(v) {
   return transaction(async (tx) => {
