@@ -1,0 +1,39 @@
+/* ==========================================================
+   TOKENS DE MARCA KUBYT
+   Cambia aquí colores, tipografías y curvas de animación.
+   Todo el sitio usa estas variables.
+   ========================================================== */
+:root {
+  /* Neutros */
+  --bg: #EEEDF2;        /* fondo general (igual al de las fotos) */
+  --paper: #F8F8FA;     /* tarjetas claras */
+  --ink: #1C1C1F;       /* negro Kubyt */
+  --ink2: #2A2A2F;      /* negro secundario */
+  --mute: #6E6D78;      /* texto secundario */
+  --line: #D9D8E0;      /* bordes y divisores */
+
+  /* Acentos de marca */
+  --violet: #7135E8;
+  --violet-d: #5524C2;
+  --violet-l: #BFA6F7;
+  --lime: #A6E83A;
+
+  /* Tipografías */
+  --brand-font: 'Unbounded', var(--display); /* logotipo KUBYT (Unbounded Bold) */
+  --display: 'Lexend', system-ui, sans-serif;
+  --body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* Movimiento */
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Tokens propios de la app de inventario */
+:root {
+  --danger: #D9534F;
+  --danger-bg: #FBEBEB;
+  --ok-bg: #EEF8DD;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --sidebar-w: 248px;
+  --shadow: 0 20px 40px -28px rgba(28, 28, 31, .35);
+}

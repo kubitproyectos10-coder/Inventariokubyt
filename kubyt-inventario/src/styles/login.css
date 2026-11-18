@@ -1,0 +1,33 @@
+/* ==== Inicio de sesión ==== */
+.login{min-height:100%;display:grid;grid-template-columns:1.1fr 1fr}
+.login-brand{padding:40px 56px;display:flex;flex-direction:column;justify-content:space-between;gap:40px;position:relative;overflow:hidden;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;background-position:-1px -1px}
+.login-brand::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 45%,transparent 0,var(--bg) 70%);pointer-events:none}
+.login-brand>*{position:relative;z-index:1}
+.login-hero h1{font-size:clamp(40px,4.6vw,64px);margin:34px 0 16px}
+.login-hero p{color:var(--ink2);font-size:17px;max-width:380px;line-height:1.6}
+.login-features{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;border-top:1px solid var(--ink);padding-top:22px;max-width:620px}
+.login-features b{display:block;font:600 15px var(--display);margin-bottom:4px}
+.login-features span{font-size:13px;color:var(--mute);line-height:1.5}
+
+/* Piezas animadas: la violeta encaja en su lugar */
+.tiles{position:relative;width:132px;height:132px}
+.tiles i{position:absolute;width:60px;height:60px;border-radius:16px;background:var(--ink2);box-shadow:inset 0 -5px 0 rgba(0,0,0,.35)}
+.tiles i:nth-child(1){left:0;top:0}.tiles i:nth-child(2){left:72px;top:0}.tiles i:nth-child(3){left:0;top:72px}
+.tiles i.slot{left:72px;top:72px;background:#D3D2DB;box-shadow:none}
+.tiles i.piece{background:var(--violet);box-shadow:inset 0 -6px 0 var(--violet-d);animation:fit 3.4s var(--ease) infinite}
+@keyframes fit{0%,15%{left:84px;top:58px}45%,80%{left:72px;top:72px}100%{left:84px;top:58px}}
+
+.login-panel{background:var(--paper);border-left:1px solid var(--line);display:grid;place-items:center;padding:40px 24px}
+.login-card{width:100%;max-width:380px;display:flex;flex-direction:column;gap:20px}
+.login-card h2{font-size:34px;margin-top:-4px}
+.login-card .muted{margin-top:-10px;font-size:14.5px}
+.secure{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:var(--mute);border-top:1px solid var(--line);padding-top:18px}
+
+@media (max-width:900px){
+  .login{grid-template-columns:1fr}
+  .login-brand{padding:28px 24px;gap:24px}
+  .login-hero h1{margin:22px 0 10px}
+  .tiles,.login-features{display:none}
+  .login-panel{border-left:0;border-top:1px solid var(--line);align-items:start}
+}
